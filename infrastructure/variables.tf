@@ -23,3 +23,8 @@ variable "aws_secret_key" {
   description = "AWS IAM Secret Key"
   type = string
 }
+
+variable "hosted_zone_id" {
+  description = "Top-level Route53 Hosted Zone ID."
+  type = string
+}

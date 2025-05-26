@@ -1,17 +1,12 @@
 from typing import Any, Dict, TypedDict
 import json
 
-# Define type for API GW event
-class APIGatewayEvent(TypedDict):
-    httpMethod: str
-    path: str
-    body: str
-    headers: Dict[str, str]
-    queryStringParameters: Dict[str, str]
+def handler(event: Any, context: Any) -> Dict[str, Any]:
+    print(event)
+    print(context)
 
-def handler(event: APIGatewayEvent, context: Any) -> Dict[str, Any]:
-    method: str = event.get("httpMethod", "")
-    path: str = event.get("path", "")
+    method: str = event["requestContext"]["http"]["method"]
+    path: str = event["requestContext"]["http"]["path"]
 
     if method == "GET" and path.startswith("/attend/"):
         code: str = path.strip("/attend/")
