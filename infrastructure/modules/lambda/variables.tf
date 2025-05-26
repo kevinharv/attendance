@@ -14,3 +14,8 @@ variable "environment" {
   description = "Deployment environment shortname."
   type = string
 }
+
+variable "apigw_execution_arn" {
+  description = "API Gateway Execution ARN"
+  type = string
+}
