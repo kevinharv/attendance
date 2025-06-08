@@ -28,3 +28,9 @@ variable "hosted_zone_id" {
   description = "Top-level Route53 Hosted Zone ID."
   type = string
 }
+
+variable "cognito_domain" {
+  description = "Custom domain for AWS Cognito user pool."
+  type        = string
+  default     = "auth.aws.kevharv.com"
+}

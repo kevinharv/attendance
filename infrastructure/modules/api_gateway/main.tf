@@ -13,6 +13,7 @@ resource "aws_apigatewayv2_stage" "default" {
 }
 
 /* ========= COGNITO AUTHORIZER CONFIGURATION ========= */
+
 resource "aws_apigatewayv2_authorizer" "cognito" {
   name            = "cognito-auth"
   api_id          = aws_apigatewayv2_api.http_api.id

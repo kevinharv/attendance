@@ -9,7 +9,7 @@ import webbrowser
 import requests
 
 # ==== Configuration ====
-CLIENT_ID = "36gvrthre8s2n59h1mj3u3ton8"
+CLIENT_ID = "2pjos1melk7dkq6drg5kdjfd3d"
 AUTH_DOMAIN = "auth.aws.kevharv.com"
 REDIRECT_URI = "http://localhost:3000/callback"
 SCOPES = "openid profile email"
@@ -84,3 +84,5 @@ tokens = response.json()
 print("\n✅ Login successful!")
 print("Access Token (Bearer):")
 print(tokens["access_token"])
+print("\nID Token:")
+print(tokens["id_token"])

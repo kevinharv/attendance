@@ -13,46 +13,32 @@ resource "aws_lambda_function" "function" {
   handler = "app.handler"
   runtime = "python3.12"
 
-  role = aws_iam_role.lambda_exec.arn
+  role = var.role_arn
 }
 
-resource "aws_iam_role" "lambda_exec" {
-  name = "lambda_execution_role"
+/* LAMBDA FUNCTION API GATEWAY ATTACHMENT */
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect = "Allow",
-      Principal = {
-        Service = "lambda.amazonaws.com"
-      },
-      Action = "sts:AssumeRole"
-    }]
-  })
+resource "aws_apigatewayv2_integration" "lambda_integration" {
+    api_id = var.apigw_id
+    integration_type = "AWS_PROXY"
+    integration_uri = aws_lambda_function.function.invoke_arn
+    integration_method = "POST"
+    payload_format_version = "2.0"
 }
 
-resource "aws_iam_policy" "lambda_basic_logging" {
-  name = "lambda_basic_logging_policy"
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        Resource = "arn:aws:logs:*:*:*"
-      }
-    ]
-  })
+resource "aws_apigatewayv2_route" "default_route" {
+    api_id = var.apigw_id
+    route_key = var.route_key
+    target = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+    authorizer_id = var.authorizer_id
+    authorization_type = "JWT"
 }
+
+/* LAMBDA FUNCTION IAM POLICY */
 
 resource "aws_iam_role_policy_attachment" "lambda_logging_attach" {
-  role       = aws_iam_role.lambda_exec.name
-  policy_arn = aws_iam_policy.lambda_basic_logging.arn
+  role       = var.role_name
+  policy_arn = var.policy_arn
 }
 
 resource "aws_lambda_permission" "api_gateway" {
