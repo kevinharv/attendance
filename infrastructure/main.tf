@@ -30,6 +30,7 @@ module "attend_route" {
   lambda_invoke_arn = module.lambda_attend.invoke_arn
   apigw_id          = module.apigw_attend.api_id
   route_key         = "ANY /{proxy+}"
+  authorizer_id     = module.apigw_attend.authorizer_id
 }
 
 /* ========= COGNITO CONFIGURATION ========= */
@@ -93,7 +94,7 @@ resource "aws_route53_record" "cert_validation_dns_record" {
   ttl     = 60
 }
 
-resource "aws_acm_certificate_validation" "cert_validation" {
-  certificate_arn         = aws_acm_certificate.cognito_cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert_validation_dns_record : record.fqdn]
-}
+# resource "aws_acm_certificate_validation" "cert_validation" {
+#   certificate_arn         = aws_acm_certificate.cognito_cert.arn
+#   validation_record_fqdns = [for record in aws_route53_record.cert_validation_dns_record : record.fqdn]
+# }

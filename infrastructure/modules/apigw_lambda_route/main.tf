@@ -12,4 +12,6 @@ resource "aws_apigatewayv2_route" "default_route" {
     api_id = var.apigw_id
     route_key = var.route_key
     target = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+    authorizer_id = var.authorizer_id
+    authorization_type = "JWT"
 }

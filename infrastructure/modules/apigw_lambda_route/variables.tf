@@ -13,3 +13,8 @@ variable "lambda_invoke_arn" {
   description = "Lambda function invoke ARN."
   type = string
 }
+
+variable "authorizer_id" {
+  description = "API Gateway authorizer ID."
+  type = string
+}
