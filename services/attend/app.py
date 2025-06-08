@@ -1,4 +1,5 @@
-from typing import Any, Dict, TypedDict
+from typing import Any, Dict
+from http import HTTPStatus
 import json
 
 def handler(event: Any, context: Any) -> Dict[str, Any]:
@@ -21,6 +22,14 @@ def handler(event: Any, context: Any) -> Dict[str, Any]:
             })
         }
     
+
+
+    # Generate code
+
+    # Redeem code
+
+
+    
     return {
         "statusCode": 400,
         "headers": {
@@ -30,3 +39,4 @@ def handler(event: Any, context: Any) -> Dict[str, Any]:
             "error": "Invalid request path and/or method."
         })
     }
+
