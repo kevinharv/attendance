@@ -9,7 +9,7 @@ import webbrowser
 import requests
 
 # ==== Configuration ====
-CLIENT_ID = "2pjos1melk7dkq6drg5kdjfd3d"
+CLIENT_ID = "75lttui7kimntt3087i5c8t2ke"
 AUTH_DOMAIN = "auth.aws.kevharv.com"
 REDIRECT_URI = "http://localhost:3000/callback"
 SCOPES = "openid profile email"

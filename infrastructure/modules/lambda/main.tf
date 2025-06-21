@@ -2,11 +2,17 @@
     Attendance app Lambda function module.
 */
 
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_dir = "${path.module}/../../../services/${var.name}"
+  output_path = "${path.root}/build/lambda_${var.name}.zip"
+}
+
 resource "aws_lambda_function" "function" {
   function_name = "${var.environment}--LAMBDA--Attend--${var.name}"
   description = var.description
-  filename = "${path.module}/../../../services/${var.name}/function.zip"
-  source_code_hash = filebase64sha256("${path.module}/../../../services/${var.name}/function.zip")
+  filename = "${path.root}/build/lambda_${var.name}.zip"
+  # source_code_hash = filebase64sha256("${path.root}/build/lambda_${var.name}.zip")
 
   architectures = [ "arm64" ]
   memory_size = 128

@@ -34,3 +34,13 @@ variable "cognito_domain" {
   type        = string
   default     = "auth.aws.kevharv.com"
 }
+
+variable "client_id" {
+  description = "OAuth/OIDC Client ID"
+  type = string
+}
+
+variable "cognito_endpoint" {
+  description = "Cognito endpoint URL. (without https://)"
+  type = string
+}

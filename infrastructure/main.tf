@@ -2,23 +2,23 @@
     Entrypoint for attendance application infrastructure.
 */
 
-module "homelab_cognito" {
-  source = "./modules/cognito"
-  name = "Homelab User Pool"
-  hosted_zone_id = var.hosted_zone_id
-  cognito_domain = var.cognito_domain
+# module "homelab_cognito" {
+#   source = "./modules/cognito"
+#   name = "Homelab User Pool"
+#   hosted_zone_id = var.hosted_zone_id
+#   cognito_domain = var.cognito_domain
 
-  # Pass through to allow non-default AWS provider
-  aws_access_key = var.aws_access_key
-  aws_secret_key = var.aws_secret_key
-}
+#   # Pass through to allow non-default AWS provider
+#   aws_access_key = var.aws_access_key
+#   aws_secret_key = var.aws_secret_key
+# }
 
 module "apigw_attend" {
   source              = "./modules/api_gateway"
   hosted_zone_id      = var.hosted_zone_id
   domain_name         = "attend.aws.kevharv.com"
-  user_pool_client_id = module.homelab_cognito.apigw_client_id
-  cognito_endpoint    = module.homelab_cognito.cognito_endpoint
+  user_pool_client_id = var.client_id
+  cognito_endpoint    = var.cognito_endpoint
 }
 
 module "lambda_attend" {
