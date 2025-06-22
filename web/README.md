@@ -1,7 +1,7 @@
 # Attendance Web Application
 
-*Web client for student, instructor, and administrative use.*
+*Web application for students, instructors, and administrators to track and manage attendance.*
 
-## About
+## Overview
 
-A modern web application supporting all personas using the platform.
+Provide all services for the attendance application stack.
